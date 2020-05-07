@@ -10,7 +10,7 @@ Prérequis :
 
 Installation et configuration:
 
-1)Cloner le projet Github avec l'éditeur eclipse.
+1)Telecharger et dezipper le fichier zip  ,ouvrir l'éditeur eclipse et importer le projet.
 
 *Ouvrir le fichier UserDao qui se trouve dans le dossier source(src) et dans le package com.objis.gestionformationssession.dao. 
 
@@ -36,7 +36,7 @@ Pour resoudre ce probleme :
 
 2)Lancer le serveur de base de donnée
 
-* importer la base de données grâce au fichier base.sql en utilisant l'onglet import
+* importer la base de données grâce au fichier gestionformations.sql en utilisant l'onglet import
 
 Deploiement:
 
