@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <%@ page import="com.objis.gestionformationssession.metier.User" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.List" %>
@@ -14,8 +15,11 @@
 	</head>
 	<body>
 		
-		<% ArrayList<User> user = (ArrayList<User>) session.getAttribute("utilisateurs"); %>
-		
+		<ul>
+		<c:forEach items="${utilisateurs}" var="utilisateur" varStatus="status">
+			<li><c:out value="${status.count}"/> <c:out value="${utilisateur.login}"/></li>
+		</c:forEach>
+		</ul>
 		<div class="w3-container w3-blue">
   		<h2>Listes des utilisateurs </h2>
   		

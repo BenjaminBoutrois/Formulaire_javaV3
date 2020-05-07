@@ -112,7 +112,7 @@ public class UserDAO {
 			rs = st.executeQuery(sql);
 			
 			while(rs.next()) {
-				users.add(new User(rs.getString("nom"), rs.getString("prenom"), rs.getString("mail"), rs.getString("mdp")));
+				users.add(new User(rs.getString("mail"), rs.getString("mdp"), rs.getString("nom"), rs.getString("prenom")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
