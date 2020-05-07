@@ -128,4 +128,56 @@ public class UserDAO {
 		}
 		return users;
 	}
+	
+	public void deleteUser(String mail) {
+		Connection cn = null;
+		Statement st = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			cn = DriverManager.getConnection(url, sql_login, sql_password);
+			st = cn.createStatement();
+			
+			String sql = "DELETE FROM user WHERE mail = '"+ mail +"'";
+			
+			st.executeUpdate(sql);
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}catch(ClassNotFoundException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				cn.close();
+				st.close();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public void updateUser(String last_mail, String name, String first_name, String new_mail, String password) {
+		Connection cn = null;
+		Statement st = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			cn = DriverManager.getConnection(url, sql_login, sql_password);
+			st = cn.createStatement();
+			
+			String sql = "UPDATE user(nom, prenom, mail, mdp)  VALUES('"+ name +"', '"+ first_name +"', '"+ new_mail +"', '"+ password +"') WHERE mail = '"+ last_mail +"'";
+			
+			st.executeUpdate(sql);
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}catch(ClassNotFoundException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				cn.close();
+				st.close();
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 }
