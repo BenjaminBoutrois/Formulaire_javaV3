@@ -85,7 +85,7 @@ public class UserDAO {
 			rs = st.executeQuery(sql);
 			
 			if(rs.next()) {
-				return new User(rs.getString("name"), rs.getString("first_name"), rs.getString("mail"), rs.getString("password"));
+				return new User(rs.getString("nom"), rs.getString("prenom"), rs.getString("mail"), rs.getString("mdp"));
 			}
 			cn.close();
 			st.close();
@@ -112,7 +112,7 @@ public class UserDAO {
 			rs = st.executeQuery(sql);
 			
 			while(rs.next()) {
-				users.add(new User(rs.getString("name"), rs.getString("first_name"), rs.getString("mail"), rs.getString("password")));
+				users.add(new User(rs.getString("nom"), rs.getString("prenom"), rs.getString("mail"), rs.getString("mdp")));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
