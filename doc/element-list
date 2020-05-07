@@ -1,0 +1,4 @@
+com.objis.gestionformationssession.dao
+com.objis.gestionformationssession.metier
+com.objis.gestionformationssession.presentation.servlet
+com.objis.gestionformationssession.service
