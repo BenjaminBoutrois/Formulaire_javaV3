@@ -85,7 +85,7 @@ public class UserDAO {
 			rs = st.executeQuery(sql);
 			
 			if(rs.next()) {
-				return new User(rs.getString("nom"), rs.getString("prenom"), rs.getString("mail"), rs.getString("mdp"));
+				return new User(rs.getString("mail"), rs.getString("mdp"), rs.getString("nom"), rs.getString("prenom"));
 			}
 			cn.close();
 			st.close();
