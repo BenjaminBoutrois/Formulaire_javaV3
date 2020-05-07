@@ -6,12 +6,14 @@
  */
 package com.objis.gestionformationssession.dao;
 
-import java.sql.DriverManager;
-import java.sql.SQLException;
-
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+
+import com.objis.gestionformationssession.metier.User;
 
 public class UserDAO {
 
@@ -20,7 +22,7 @@ public class UserDAO {
 	private String sql_password = "";
 	
 	
-	public void insert(String nom, String prenom, String mail, String mdp) {
+	public void createUser(String nom, String prenom, String mail, String mdp) {
 		Connection cn = null;
 		Statement st = null;
 		try {
@@ -42,7 +44,7 @@ public class UserDAO {
 		}
 	}
 	
-	public boolean authentification(String login, String mdp) {
+	public boolean getUser(String login, String mdp) {
 		Connection cn = null;
 		Statement st = null;
 		ResultSet rs = null;
@@ -67,5 +69,63 @@ public class UserDAO {
 			e.printStackTrace();
 		}
 		return false;
+	}
+	
+	public User getUser(String login) {
+		Connection cn = null;
+		Statement st = null;
+		ResultSet rs = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			cn = DriverManager.getConnection(url, sql_login, sql_password);
+			st = cn.createStatement();
+			
+			String sql = "SELECT * FROM user WHERE mail = '"+ login +"'";
+			
+			rs = st.executeQuery(sql);
+			
+			if(rs.next()) {
+				return new User(rs.getString("name"), rs.getString("first_name"), rs.getString("mail"), rs.getString("password"));
+			}
+			cn.close();
+			st.close();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}catch(ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public ArrayList<User> getAllUser() {
+		Connection cn = null;
+		Statement st = null;
+		ResultSet rs = null;
+		ArrayList<User> users = new ArrayList<User>();
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			cn = DriverManager.getConnection(url, sql_login, sql_password);
+			st = cn.createStatement();
+			
+			String sql = "SELECT * FROM user";
+			rs = st.executeQuery(sql);
+			
+			while(rs.next()) {
+				users.add(new User(rs.getString("name"), rs.getString("first_name"), rs.getString("mail"), rs.getString("password")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e ) {
+			e.printStackTrace();
+		} finally {
+			try {
+				cn.close();
+				st.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return users;
 	}
 }

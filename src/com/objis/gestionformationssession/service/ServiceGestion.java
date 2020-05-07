@@ -17,11 +17,19 @@ public class ServiceGestion {
 		userDAO = new UserDAO();
 	}
 	
-	public boolean authentification(User user) {
-		return userDAO.authentification(user.getLogin(), user.getPassword());
+	public boolean authentificate(String mail, String password) {
+		return userDAO.getUser(mail, password);
 	}
 	
-	public void insert(String nom, String prenom, String mail, String mdp) {
-		userDAO.insert(nom, prenom, mail, mdp);
+	public User getUser(String mail) {
+		return userDAO.getUser(mail);
+	}
+	
+	public void create(String nom, String prenom, String mail, String mdp) {
+		userDAO.createUser(nom, prenom, mail, mdp);
+	}
+	
+	public void getAll() {
+		userDAO.getAllUser();
 	}
 }

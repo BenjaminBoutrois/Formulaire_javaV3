@@ -48,12 +48,11 @@ public class AuthentificationServlet extends HttpServlet {
 		String login = request.getParameter("login");
 		String password = request.getParameter("password");
 		
-		User user = new User(login, password);
-		
 		RequestDispatcher dispatcher;
 		ServiceGestion auth = new ServiceGestion();
 		
-		if(auth.authentification(user)) {
+		if(auth.authentificate(login, password)) {
+			User user = auth.getUser(login);
 			HttpSession session = request.getSession();
 			session.setAttribute("utilisateur", user);
 			dispatcher = request.getRequestDispatcher("accueil.jsp");

@@ -49,9 +49,9 @@ public class InscriptionServlet extends HttpServlet {
 		RequestDispatcher dispatcher;
 		ServiceGestion serviceGestion = new ServiceGestion();
 		
-		serviceGestion.insert(nom, prenom, email, mdp);
+		serviceGestion.create(nom, prenom, email, mdp);
 		
-		User user = new User(email, mdp);
+		User user = new User(email, mdp, email, mdp);
 		
 		HttpSession session = request.getSession();
 		session.setAttribute("utilisateur", user);
